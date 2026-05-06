@@ -1,122 +1,115 @@
-@import "tailwindcss";
-@import "tw-animate-css";
-@import "shadcn/tailwind.css";
-
-@custom-variant dark (&:is(.dark *));
-
-:root {
-  --background: oklch(0.08 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.12 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.12 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.18 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.18 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.18 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.12 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.18 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
-}
-
-body {
-  background-color: #09090b;
-  color: #fafafa;
-}
-
-* {
-  border-color: oklch(1 0 0 / 10%);
-}
-
-/* Modo claro */
+/* ── MODO CLARO ─────────────────────────────────────────────────── */
 html.light {
-  --bg-primary: #f8f8ff;
-  --bg-secondary: #f0f0fa;
-  --text-primary: #18181b;
-  --text-secondary: #52525b;
-  --border-color: rgba(0, 0, 0, 0.08);
+  color-scheme: light;
 }
 
 html.light body {
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
+  background-color: #f0f0f7;
+  color: #18181b;
 }
 
+/* Background principal */
 html.light .bg-\[\#080810\] {
-  background-color: #f8f8ff !important;
+  background-color: #f0f0f7 !important;
 }
-
 html.light .bg-\[\#080810\]\/80 {
-  background-color: rgba(248, 248, 255, 0.85) !important;
+  background-color: rgba(240,240,247,0.90) !important;
 }
 
+/* Cards e containers */
+html.light .bg-gradient-to-br.from-zinc-900\/90,
+html.light .bg-gradient-to-br.from-zinc-900\/80,
+html.light .bg-gradient-to-br.from-zinc-900\/60,
+html.light .bg-gradient-to-br.from-zinc-900\/40 {
+  background: linear-gradient(135deg, #ffffff, #f5f5fa) !important;
+}
 html.light .bg-zinc-900\/60,
 html.light .bg-zinc-900\/80,
 html.light .bg-zinc-900\/40,
 html.light .bg-zinc-900\/90 {
-  background-color: rgba(255, 255, 255, 0.9) !important;
+  background-color: #ffffff !important;
+}
+html.light .bg-gradient-to-b.from-zinc-900\/80 {
+  background: linear-gradient(180deg, #ffffff, #f5f5fa) !important;
 }
 
+/* Bordas */
 html.light .border-white\/5,
 html.light .border-white\/8 {
-  border-color: rgba(0, 0, 0, 0.08) !important;
+  border-color: rgba(0,0,0,0.10) !important;
+}
+html.light .border-zinc-800,
+html.light .border-zinc-800\/60,
+html.light .border-zinc-800\/80,
+html.light .border-zinc-700 {
+  border-color: rgba(0,0,0,0.12) !important;
 }
 
+/* Textos */
 html.light .text-white {
   color: #18181b !important;
 }
-
 html.light .text-zinc-100,
 html.light .text-zinc-200,
 html.light .text-zinc-300 {
   color: #27272a !important;
 }
-
 html.light .text-zinc-400 {
   color: #52525b !important;
 }
-
 html.light .text-zinc-500 {
   color: #71717a !important;
 }
-
 html.light .text-zinc-600 {
   color: #a1a1aa !important;
 }
+html.light .text-zinc-700 {
+  color: #d4d4d8 !important;
+}
 
+/* Backgrounds secundários */
 html.light .bg-zinc-800\/60,
 html.light .bg-zinc-800\/40,
 html.light .bg-zinc-800 {
-  background-color: rgba(0, 0, 0, 0.06) !important;
+  background-color: #e4e4ef !important;
 }
-
 html.light .bg-black\/50,
 html.light .bg-black\/40,
 html.light .bg-black\/30,
 html.light .bg-black\/20 {
-  background-color: rgba(0, 0, 0, 0.04) !important;
+  background-color: rgba(0,0,0,0.04) !important;
 }
-
-html.light .border-zinc-800,
-html.light .border-zinc-700 {
-  border-color: rgba(0, 0, 0, 0.12) !important;
-}
-
 html.light .bg-zinc-900\/60.backdrop-blur-xl {
-  background-color: rgba(248, 248, 255, 0.9) !important;
+  background-color: rgba(240,240,247,0.95) !important;
+}
+
+/* Inputs */
+html.light input,
+html.light select {
+  background-color: #ffffff !important;
+  color: #18181b !important;
+  border-color: rgba(0,0,0,0.15) !important;
+}
+html.light input::placeholder {
+  color: #a1a1aa !important;
+}
+
+/* Imagem dos cards */
+html.light .bg-gradient-to-br.from-zinc-800\/60 {
+  background: linear-gradient(135deg, #e8e8f0, #f0f0f7) !important;
+}
+
+/* Skeleton */
+html.light .bg-zinc-800\/60 {
+  background-color: #e0e0ea !important;
+}
+
+/* Hover nos cards */
+html.light .hover\:bg-white\/2:hover {
+  background-color: rgba(0,0,0,0.02) !important;
+}
+
+/* Divide */
+html.light .divide-white\/5 > * + * {
+  border-color: rgba(0,0,0,0.06) !important;
 }
