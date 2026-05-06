@@ -137,8 +137,21 @@ html.light span[class*="rounded-full"] {
   background-image: none !important;
 }
 
-/* Análise IA e histórico — fundo visível */
+
 html.light div[class*="bg-zinc-950"],
 html.light div[class*="bg-black"] {
   background-color: #d8d8d8 !important;
 }
+html.light div[class*="rounded-2xl"],
+html.light div[class*="rounded-3xl"] {
+  border: 1px solid #888888 !important;
+}
+
+html.light div[class*="from-violet-500"][class*="rounded-full"] { background: linear-gradient(135deg, #7c3aed, #6366f1) !important; }
+html.light div[class*="from-emerald-500"][class*="rounded-full"] { background: linear-gradient(135deg, #10b981, #14b8a6) !important; }
+html.light div[class*="from-rose-500"][class*="rounded-full"] { background: linear-gradient(135deg, #f43f5e, #ec4899) !important; }
+html.light div[class*="from-amber-500"][class*="rounded-full"] { background: linear-gradient(135deg, #f59e0b, #f97316) !important; }
+html.light div[class*="from-cyan-500"][class*="rounded-full"] { background: linear-gradient(135deg, #06b6d4, #3b82f6) !important; }
+html.light div[class*="from-fuchsia-500"][class*="rounded-full"] { background: linear-gradient(135deg, #d946ef, #a855f7) !important; }
+
+html.light div[class*="rounded-full"] * { color: #ffffff !important; }
