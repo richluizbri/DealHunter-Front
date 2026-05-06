@@ -33,6 +33,18 @@ function sentimentConfig(sentiment) {
   return                               { icon: "😐", color: "text-zinc-400",    bg: "from-zinc-500/20 to-zinc-500/5 border-zinc-500/30" };
 }
 
+const reviewNames     = ["Ana S.", "Carlos M.", "Julia R.", "Pedro L.", "Mariana T.", "Rafael O.", "Beatriz F.", "Lucas N."];
+const reviewStars     = [5, 4, 5, 4, 5, 3, 5, 4];
+const reviewDaysAgo   = [2, 5, 8, 12, 15, 20, 25, 30];
+const reviewGradients = [
+  "from-violet-500 to-indigo-500",
+  "from-emerald-500 to-teal-500",
+  "from-rose-500 to-pink-500",
+  "from-amber-500 to-orange-500",
+  "from-cyan-500 to-blue-500",
+  "from-fuchsia-500 to-purple-500",
+];
+
 export default function ProductDetails() {
   const { id } = useParams();
   const router  = useRouter();
@@ -97,9 +109,7 @@ export default function ProductDetails() {
   function getVariacao() {
     const h = product?.history || [];
     if (h.length < 2) return null;
-    const atual    = h[h.length - 1].preco;
-    const anterior = h[h.length - 2].preco;
-    return ((atual - anterior) / anterior) * 100;
+    return ((h[h.length - 1].preco - h[h.length - 2].preco) / h[h.length - 2].preco) * 100;
   }
 
   const chartData = product?.history?.map((item) => ({
@@ -132,7 +142,7 @@ export default function ProductDetails() {
   return (
     <main className="min-h-screen bg-[#080810] text-white overflow-x-hidden">
 
-      {/* Glow de fundo */}
+      {/* Glow */}
       <div className="fixed inset-0 pointer-events-none">
         <div className="absolute top-[-200px] left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-violet-700/10 rounded-full blur-[140px]" />
         <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-indigo-700/8 rounded-full blur-[120px]" />
@@ -166,12 +176,10 @@ export default function ProductDetails() {
 
         {/* HERO */}
         <div className="relative rounded-3xl overflow-hidden border border-white/8 bg-gradient-to-br from-zinc-900/90 to-zinc-900/60 backdrop-blur-sm">
-          {/* linha topo */}
           <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-violet-500/80 to-transparent" />
-
           <div className="flex flex-col md:flex-row">
 
-            {/* Imagem grande */}
+            {/* Imagem */}
             <div className="relative md:w-[460px] md:min-h-[420px] h-72 bg-gradient-to-br from-zinc-800/50 to-zinc-900/50 flex items-center justify-center overflow-hidden flex-shrink-0">
               <div className="absolute inset-0 bg-gradient-to-br from-violet-600/5 via-transparent to-indigo-600/5" />
               {product.imagem ? (
@@ -194,14 +202,10 @@ export default function ProductDetails() {
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                   Monitorado
                 </span>
-                <span className="text-xs text-zinc-600">
-                  {new Date(product.createdAt).toLocaleString("pt-BR")}
-                </span>
+                <span className="text-xs text-zinc-600">{new Date(product.createdAt).toLocaleString("pt-BR")}</span>
               </div>
 
-              <h1 className="text-2xl md:text-3xl font-bold text-white leading-tight">
-                {product.titulo}
-              </h1>
+              <h1 className="text-2xl md:text-3xl font-bold text-white leading-tight">{product.titulo}</h1>
 
               {product.rating && (
                 <p className="text-sm text-amber-400/80 flex items-center gap-1">
@@ -230,7 +234,7 @@ export default function ProductDetails() {
 
               <div className="flex flex-wrap gap-3 pt-2">
                 {product.url && (
-                  <a 
+                  
                     href={product.url}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -273,123 +277,87 @@ export default function ProductDetails() {
         </div>
 
         {/* REVIEWS */}
-{reviews.length > 0 && (
-  <div className="rounded-3xl border border-white/8 bg-gradient-to-br from-zinc-900/80 to-zinc-900/40 overflow-hidden">
-    
-    {/* Header */}
-    <div className="px-7 py-6 border-b border-white/5">
-      <div className="flex items-center justify-between flex-wrap gap-3">
-        <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-500/20 to-orange-500/10 border border-amber-500/25 flex items-center justify-center text-lg">⭐</div>
-          <div>
-            <h3 className="text-sm font-bold text-white">Avaliações dos Clientes</h3>
-            <p className="text-xs text-zinc-500">{reviews.length} avaliação(ões) verificada(s)</p>
-          </div>
-        </div>
+        {reviews.length > 0 && (
+          <div className="rounded-3xl border border-white/8 bg-gradient-to-br from-zinc-900/80 to-zinc-900/40 overflow-hidden">
 
-        {/* Nota geral */}
-        {product.rating && (
-          <div className="flex items-center gap-3 bg-amber-500/8 border border-amber-500/20 rounded-2xl px-4 py-2.5">
-            <p className="text-3xl font-black text-amber-400">
-              {product.rating.split(" ")[0]}
-            </p>
-            <div>
-              <div className="flex gap-0.5">
-                {Array.from({ length: 5 }).map((_, i) => {
-                  const rating = parseFloat(product.rating);
-                  return (
-                    <span key={i} className={`text-sm ${i < Math.round(rating) ? "text-amber-400" : "text-zinc-700"}`}>★</span>
-                  );
-                })}
+            {/* Header reviews */}
+            <div className="px-7 py-6 border-b border-white/5">
+              <div className="flex items-center justify-between flex-wrap gap-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-500/20 to-orange-500/10 border border-amber-500/25 flex items-center justify-center text-lg">⭐</div>
+                  <div>
+                    <h3 className="text-sm font-bold text-white">Avaliações dos Clientes</h3>
+                    <p className="text-xs text-zinc-500">{reviews.length} avaliação(ões) verificada(s)</p>
+                  </div>
+                </div>
+                {product.rating && (
+                  <div className="flex items-center gap-3 bg-amber-500/8 border border-amber-500/20 rounded-2xl px-4 py-2.5">
+                    <p className="text-3xl font-black text-amber-400">{product.rating.split(" ")[0]}</p>
+                    <div>
+                      <div className="flex gap-0.5">
+                        {Array.from({ length: 5 }).map((_, i) => (
+                          <span key={i} className={`text-sm ${i < Math.round(parseFloat(product.rating)) ? "text-amber-400" : "text-zinc-700"}`}>★</span>
+                        ))}
+                      </div>
+                      <p className="text-xs text-zinc-500 mt-0.5">nota geral</p>
+                    </div>
+                  </div>
+                )}
               </div>
-              <p className="text-xs text-zinc-500 mt-0.5">nota geral</p>
+            </div>
+
+            {/* Lista reviews */}
+            <div className="divide-y divide-white/5">
+              {reviews.map((review, i) => {
+                const name     = reviewNames[i % reviewNames.length];
+                const star     = reviewStars[i % reviewStars.length];
+                const days     = reviewDaysAgo[i % reviewDaysAgo.length];
+                const gradient = reviewGradients[i % reviewGradients.length];
+                const initials = name.split(" ").map((n) => n[0]).join("");
+
+                return (
+                  <div key={review.id} className="px-7 py-5 hover:bg-white/2 transition-all duration-200">
+                    <div className="flex gap-4">
+                      <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${gradient} flex items-center justify-center text-xs font-black text-white flex-shrink-0 shadow-lg`}>
+                        {initials}
+                      </div>
+                      <div className="flex-1 space-y-2 min-w-0">
+                        <div className="flex items-start justify-between gap-2 flex-wrap">
+                          <div>
+                            <p className="text-sm font-semibold text-white">{name}</p>
+                            <div className="flex items-center gap-1 mt-0.5">
+                              {Array.from({ length: 5 }).map((_, s) => (
+                                <span key={s} className={`text-xs ${s < star ? "text-amber-400" : "text-zinc-700"}`}>★</span>
+                              ))}
+                              <span className="text-xs text-zinc-600 ml-1">({star}/5)</span>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-2 flex-shrink-0">
+                            <span className="text-xs text-zinc-600">há {days} dias</span>
+                            <span className="inline-flex items-center gap-1 text-xs text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 rounded-full px-2 py-0.5">
+                              ✓ Verificada
+                            </span>
+                          </div>
+                        </div>
+                        <p className="text-sm text-zinc-300 leading-relaxed">{review.texto}</p>
+                        <div className="flex items-center gap-3 pt-1">
+                          <span className="text-xs text-zinc-600">Útil?</span>
+                          <button className="text-xs text-zinc-500 hover:text-emerald-400 transition-colors duration-200">👍 Sim</button>
+                          <button className="text-xs text-zinc-500 hover:text-red-400 transition-colors duration-200">👎 Não</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Footer */}
+            <div className="px-7 py-4 border-t border-white/5 bg-black/20">
+              <p className="text-xs text-zinc-600 text-center">Avaliações coletadas automaticamente pelo DealHunter AI</p>
             </div>
           </div>
         )}
-      </div>
-    </div>
-
-    {/* Lista de reviews */}
-    <div className="divide-y divide-white/5">
-      {reviews.map((review, i) => {
-        const names = ["Ana S.", "Carlos M.", "Julia R.", "Pedro L.", "Mariana T.", "Rafael O.", "Beatriz F.", "Lucas N."];
-        const stars = [5, 4, 5, 4, 5, 3, 5, 4];
-        const daysAgo = [2, 5, 8, 12, 15, 20, 25, 30];
-        const name  = names[i % names.length];
-        const star  = stars[i % stars.length];
-        const days  = daysAgo[i % daysAgo.length];
-        const initials = name.split(" ").map((n) => n[0]).join("");
-        const gradients = [
-          "from-violet-500 to-indigo-500",
-          "from-emerald-500 to-teal-500",
-          "from-rose-500 to-pink-500",
-          "from-amber-500 to-orange-500",
-          "from-cyan-500 to-blue-500",
-          "from-fuchsia-500 to-purple-500",
-        ];
-        const gradient = gradients[i % gradients.length];
-
-        return (
-          <div
-            key={review.id}
-            className="px-7 py-5 hover:bg-white/2 transition-all duration-200 group"
-          >
-            <div className="flex gap-4">
-              {/* Avatar */}
-              <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${gradient} flex items-center justify-center text-xs font-black text-white flex-shrink-0 shadow-lg`}>
-                {initials}
-              </div>
-
-              <div className="flex-1 space-y-2 min-w-0">
-                {/* Nome + estrelas + data */}
-                <div className="flex items-start justify-between gap-2 flex-wrap">
-                  <div>
-                    <p className="text-sm font-semibold text-white">{name}</p>
-                    <div className="flex items-center gap-1 mt-0.5">
-                      {Array.from({ length: 5 }).map((_, s) => (
-                        <span key={s} className={`text-xs ${s < star ? "text-amber-400" : "text-zinc-700"}`}>★</span>
-                      ))}
-                      <span className="text-xs text-zinc-600 ml-1">({star}/5)</span>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2 flex-shrink-0">
-                    <span className="text-xs text-zinc-600">há {days} dias</span>
-                    <span className="inline-flex items-center gap-1 text-xs text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 rounded-full px-2 py-0.5">
-                      ✓ Compra verificada
-                    </span>
-                  </div>
-                </div>
-
-                {/* Texto da review */}
-                <p className="text-sm text-zinc-300 leading-relaxed">
-                  {review.texto}
-                </p>
-
-                {/* Util? */}
-                <div className="flex items-center gap-3 pt-1">
-                  <span className="text-xs text-zinc-600">Útil?</span>
-                  <button className="text-xs text-zinc-500 hover:text-emerald-400 transition-colors duration-200 flex items-center gap-1">
-                    👍 Sim
-                  </button>
-                  <button className="text-xs text-zinc-500 hover:text-red-400 transition-colors duration-200 flex items-center gap-1">
-                    👎 Não
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        );
-      })}
-    </div>
-
-    {/* Footer */}
-    <div className="px-7 py-4 border-t border-white/5 bg-black/20">
-      <p className="text-xs text-zinc-600 text-center">
-        Avaliações coletadas automaticamente pelo DealHunter AI
-      </p>
-    </div>
-  </div>
-)}
 
         {/* IA */}
         <div className="rounded-3xl border border-white/8 bg-gradient-to-br from-zinc-900/80 to-zinc-900/40 overflow-hidden">
@@ -425,9 +393,7 @@ export default function ProductDetails() {
                   <span className="text-2xl">{trendConfig(aiData.priceAnalysis.trend).icon}</span>
                   <div>
                     <p className="text-xs text-zinc-500 uppercase tracking-widest">Tendência</p>
-                    <p className={`text-sm font-bold ${trendConfig(aiData.priceAnalysis.trend).color}`}>
-                      {trendConfig(aiData.priceAnalysis.trend).label}
-                    </p>
+                    <p className={`text-sm font-bold ${trendConfig(aiData.priceAnalysis.trend).color}`}>{trendConfig(aiData.priceAnalysis.trend).label}</p>
                   </div>
                 </div>
                 <p className="text-sm text-zinc-200 leading-relaxed">{aiData.priceAnalysis.summary}</p>
@@ -450,9 +416,7 @@ export default function ProductDetails() {
                   <span className="text-2xl">{sentimentConfig(aiData.ratingAnalysis.sentiment).icon}</span>
                   <div>
                     <p className="text-xs text-zinc-500 uppercase tracking-widest">Sentimento</p>
-                    <p className={`text-sm font-bold ${sentimentConfig(aiData.ratingAnalysis.sentiment).color}`}>
-                      {aiData.ratingAnalysis.label}
-                    </p>
+                    <p className={`text-sm font-bold ${sentimentConfig(aiData.ratingAnalysis.sentiment).color}`}>{aiData.ratingAnalysis.label}</p>
                   </div>
                 </div>
                 <p className="text-sm text-zinc-200 leading-relaxed">{aiData.ratingAnalysis.description}</p>
@@ -514,6 +478,7 @@ export default function ProductDetails() {
             )}
           </div>
         </div>
+
       </section>
     </main>
   );
