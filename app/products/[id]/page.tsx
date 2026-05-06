@@ -186,7 +186,7 @@ export default function ProductDetails() {
                 <img
                   src={product.imagem}
                   alt={product.titulo}
-                  className="w-full h-full object-contain p-8 drop-shadow-2xl transition-transform duration-700 hover:scale-105"
+                 className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
                   style={{ filter: "drop-shadow(0 30px 60px rgba(139,92,246,0.3))" }}
                 />
               ) : (

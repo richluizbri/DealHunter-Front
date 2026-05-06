@@ -247,7 +247,7 @@ export default function Home() {
                         <img
                           src={product.imagem}
                           alt={product.titulo}
-                          className="w-full h-full object-contain p-5 group-hover:scale-110 transition-transform duration-500"
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                         />
                       ) : (
                         <span className="text-zinc-600 text-sm">Sem imagem</span>
