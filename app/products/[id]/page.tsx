@@ -233,8 +233,8 @@ export default function ProductDetails() {
               </div>
 
               <div className="flex flex-wrap gap-3 pt-2">
-                {product.url && ( <a 
-                  
+                {product.url && ( 
+                  <a 
                     href={product.url}
                     target="_blank"
                     rel="noopener noreferrer"
