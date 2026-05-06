@@ -170,3 +170,51 @@ html.light select {
 html.light [class*="bg-black"] {
   background-color: rgba(0,0,0,0.04) !important;
 }
+html.light {
+  background-color: #f0f0f0;
+  color: #111111;
+}
+
+html.light main {
+  background-color: #f0f0f0 !important;
+  color: #111111 !important;
+}
+
+html.light header {
+  background-color: rgba(240,240,240,0.95) !important;
+  border-color: rgba(0,0,0,0.1) !important;
+}
+
+html.light section * {
+  color: #111111 !important;
+}
+
+html.light [class*="bg-\[#080810\]"] {
+  background-color: #f0f0f0 !important;
+}
+
+html.light [class*="from-zinc-900"],
+html.light [class*="bg-zinc-900"] {
+  background-color: #e8e8e8 !important;
+}
+
+html.light [class*="bg-black"],
+html.light [class*="bg-zinc-800"] {
+  background-color: #e0e0e0 !important;
+}
+
+html.light [class*="border-white"],
+html.light [class*="border-zinc-"] {
+  border-color: rgba(0,0,0,0.15) !important;
+}
+
+html.light input,
+html.light select {
+  background-color: #ffffff !important;
+  color: #111111 !important;
+  border-color: rgba(0,0,0,0.2) !important;
+}
+
+html.light input::placeholder {
+  color: #888888 !important;
+}
