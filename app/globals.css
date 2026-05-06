@@ -44,35 +44,6 @@ body {
 }
 
 /* ── MODO CLARO ── */
-html.light body { background-color: #e0e0e0 !important; color: #111111 !important; }
-html.light main { background-color: #e0e0e0 !important; }
-html.light header { background-color: #d4d4d4 !important; border-color: #bbbbbb !important; }
-html.light section { background-color: #e0e0e0 !important; }
-
-html.light div[class*="rounded-2xl"],
-html.light div[class*="rounded-3xl"] {
-  background-color: #cccccc !important;
-  border-color: #aaaaaa !important;
-}
-
-html.light * { color: #111111 !important; }
-
-html.light .text-violet-400, html.light .text-violet-300 { color: #6d28d9 !important; }
-html.light .text-emerald-400, html.light .text-emerald-300 { color: #059669 !important; }
-html.light .text-red-400 { color: #dc2626 !important; }
-html.light .text-amber-400 { color: #d97706 !important; }
-html.light .text-cyan-400 { color: #0891b2 !important; }
-
-html.light input, html.light select {
-  background-color: #f0f0f0 !important;
-  color: #111111 !important;
-  border-color: #aaaaaa !important;
-}
-html.light input::placeholder { color: #777777 !important; }
-
-html.light [class*="from-violet-600"] { background: #7c3aed !important; }
-html.light [class*="from-violet-600"] * { color: #ffffff !important; }
-/* ── MODO CLARO ── */
 html.light body { background-color: #f0f0f0 !important; color: #111111 !important; }
 html.light main { background-color: #f0f0f0 !important; }
 html.light header { background-color: #e8e8e8 !important; border-color: #cccccc !important; }
@@ -85,6 +56,35 @@ html.light div[class*="rounded-3xl"] {
   background-image: none !important;
   border-color: #cccccc !important;
 }
+
+/* Quadrado da imagem do produto — cinza escuro */
+html.light div[class*="h-56"],
+html.light div[class*="h-72"],
+html.light div[class*="md:min-h"] {
+  background-color: #c8c8c8 !important;
+  background-image: none !important;
+}
+
+/* Box de monitorar novo produto — cinza escuro */
+html.light div[class*="border-violet-500"] {
+  background-color: #c8c8c8 !important;
+  background-image: none !important;
+  border-color: #aaaaaa !important;
+}
+
+/* Badge de variação de preço — cinza escuro */
+html.light div[class*="backdrop-blur-sm"],
+html.light span[class*="backdrop-blur-sm"] {
+  background-color: #b0b0b0 !important;
+  background-image: none !important;
+}
+
+/* Preço e descrição — preto forte */
+html.light p[class*="text-5xl"],
+html.light p[class*="text-xl"],
+html.light p[class*="font-black"],
+html.light p[class*="font-bold"],
+html.light h1 { color: #000000 !important; }
 
 html.light .text-violet-400, html.light .text-violet-300 { color: #6d28d9 !important; }
 html.light .text-emerald-400, html.light .text-emerald-300 { color: #059669 !important; }
@@ -103,7 +103,7 @@ html.light input::placeholder { color: #888888 !important; }
 html.light [class*="from-violet-600"],
 html.light [class*="bg-gradient-to-r"] {
   background: #7c3aed !important;
-  background-image: none !important;
-}
+  background-image: none !important 
+  }
 html.light [class*="from-violet-600"] *,
 html.light [class*="bg-gradient-to-r"] * { color: #ffffff !important; }
