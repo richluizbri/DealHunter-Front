@@ -57,41 +57,57 @@ html.light div[class*="rounded-3xl"] {
   border-color: #cccccc !important;
 }
 
-/* Quadrado da imagem do produto — cinza escuro */
+/* Quadrado da imagem — fundo branco para ver a imagem */
 html.light div[class*="h-56"],
 html.light div[class*="h-72"],
 html.light div[class*="md:min-h"] {
-  background-color: #c8c8c8 !important;
+  background-color: #ffffff !important;
   background-image: none !important;
 }
 
-/* Box de monitorar novo produto — cinza escuro */
+/* Remove roxo atrás da imagem */
+html.light div[class*="from-violet-600"],
+html.light div[class*="inset-0"] {
+  background: transparent !important;
+  background-image: none !important;
+}
+
+/* Box monitorar novo produto */
 html.light div[class*="border-violet-500"] {
-  background-color: #c8c8c8 !important;
+  background-color: #d0d0d0 !important;
   background-image: none !important;
   border-color: #aaaaaa !important;
 }
 
-/* Badge de variação de preço — cinza escuro */
-html.light div[class*="backdrop-blur-sm"],
-html.light span[class*="backdrop-blur-sm"] {
-  background-color: #b0b0b0 !important;
-  background-image: none !important;
+/* Todos textos pretos */
+html.light p, html.light span, html.light h1, html.light h2, html.light h3, html.light a {
+  color: #111111 !important;
 }
 
-/* Preço e descrição — preto forte */
-html.light p[class*="text-5xl"],
-html.light p[class*="text-xl"],
+/* Preços e títulos bem pretos */
 html.light p[class*="font-black"],
 html.light p[class*="font-bold"],
 html.light h1 { color: #000000 !important; }
 
+/* Cores que devem manter */
 html.light .text-violet-400, html.light .text-violet-300 { color: #6d28d9 !important; }
 html.light .text-emerald-400, html.light .text-emerald-300 { color: #059669 !important; }
 html.light .text-red-400 { color: #dc2626 !important; }
 html.light .text-amber-400 { color: #d97706 !important; }
 html.light .text-cyan-400 { color: #0891b2 !important; }
 
+/* Avatares das reviews mantém cor */
+html.light div[class*="rounded-full"] {
+  background-color: unset !important;
+}
+
+/* Gráfico — fundo claro */
+html.light .recharts-wrapper,
+html.light .recharts-surface {
+  background-color: #e8e8e8 !important;
+}
+
+/* Inputs */
 html.light input, html.light select {
   background-color: #ffffff !important;
   background-image: none !important;
@@ -100,10 +116,29 @@ html.light input, html.light select {
 }
 html.light input::placeholder { color: #888888 !important; }
 
-html.light [class*="from-violet-600"],
-html.light [class*="bg-gradient-to-r"] {
+/* Botões com gradiente violet mantém branco */
+html.light button[class*="from-violet-600"],
+html.light a[class*="from-violet-600"] {
   background: #7c3aed !important;
-  background-image: none !important 
-  }
-html.light [class*="from-violet-600"] *,
-html.light [class*="bg-gradient-to-r"] * { color: #ffffff !important; }
+  background-image: none !important;
+}
+html.light button[class*="from-violet-600"] *,
+html.light a[class*="from-violet-600"] * { color: #ffffff !important; }
+
+/* Link ver produto original */
+html.light a[class*="border-zinc-700"] {
+  border-color: #aaaaaa !important;
+  color: #111111 !important;
+}
+
+/* Badge variação */
+html.light span[class*="rounded-full"] {
+  background-color: #d0d0d0 !important;
+  background-image: none !important;
+}
+
+/* Análise IA e histórico — fundo visível */
+html.light div[class*="bg-zinc-950"],
+html.light div[class*="bg-black"] {
+  background-color: #d8d8d8 !important;
+}
