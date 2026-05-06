@@ -142,13 +142,11 @@ export default function ProductDetails() {
   return (
     <main className="min-h-screen bg-[#080810] text-white overflow-x-hidden">
 
-      {/* Glow */}
       <div className="fixed inset-0 pointer-events-none">
         <div className="absolute top-[-200px] left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-violet-700/10 rounded-full blur-[140px]" />
         <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-indigo-700/8 rounded-full blur-[120px]" />
       </div>
 
-      {/* Header */}
       <header className="sticky top-0 z-50 border-b border-white/5 bg-[#080810]/80 backdrop-blur-xl">
         <div className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
           <button
@@ -173,24 +171,24 @@ export default function ProductDetails() {
           transition: "all 0.5s ease",
         }}
       >
-
         {/* HERO */}
         <div className="relative rounded-3xl overflow-hidden border border-white/8 bg-gradient-to-br from-zinc-900/90 to-zinc-900/60 backdrop-blur-sm">
           <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-violet-500/80 to-transparent" />
           <div className="flex flex-col md:flex-row">
 
-            {/* Imagem */}
-            <div className="relative md:w-[460px] md:min-h-[420px] h-72 bg-gradient-to-br from-zinc-800/50 to-zinc-900/50 flex items-center justify-center overflow-hidden flex-shrink-0">
+            {/* Imagem — object-cover preenche todo o espaço */}
+            <div className="relative md:w-[460px] md:min-h-[420px] h-72 bg-gradient-to-br from-zinc-800/50 to-zinc-900/50 overflow-hidden flex-shrink-0">
               <div className="absolute inset-0 bg-gradient-to-br from-violet-600/5 via-transparent to-indigo-600/5" />
               {product.imagem ? (
                 <img
                   src={product.imagem}
                   alt={product.titulo}
-                 className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-                  style={{ filter: "drop-shadow(0 30px 60px rgba(139,92,246,0.3))" }}
+                  className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
                 />
               ) : (
-                <span className="text-zinc-600 text-sm">Sem imagem</span>
+                <div className="w-full h-full flex items-center justify-center">
+                  <span className="text-zinc-600 text-sm">Sem imagem</span>
+                </div>
               )}
               <div className="hidden md:block absolute right-0 top-10 bottom-10 w-px bg-gradient-to-b from-transparent via-white/8 to-transparent" />
             </div>
@@ -254,7 +252,6 @@ export default function ProductDetails() {
                 </button>
               </div>
 
-              {/* Logs */}
               {logs.length > 0 && (
                 <div className="bg-black/50 border border-white/5 rounded-2xl p-4 space-y-2">
                   <p className="text-xs text-zinc-500 uppercase tracking-widest mb-2">Status da coleta</p>
@@ -279,8 +276,6 @@ export default function ProductDetails() {
         {/* REVIEWS */}
         {reviews.length > 0 && (
           <div className="rounded-3xl border border-white/8 bg-gradient-to-br from-zinc-900/80 to-zinc-900/40 overflow-hidden">
-
-            {/* Header reviews */}
             <div className="px-7 py-6 border-b border-white/5">
               <div className="flex items-center justify-between flex-wrap gap-4">
                 <div className="flex items-center gap-3">
@@ -306,7 +301,6 @@ export default function ProductDetails() {
               </div>
             </div>
 
-            {/* Lista reviews */}
             <div className="divide-y divide-white/5">
               {reviews.map((review, i) => {
                 const name     = reviewNames[i % reviewNames.length];
@@ -314,7 +308,6 @@ export default function ProductDetails() {
                 const days     = reviewDaysAgo[i % reviewDaysAgo.length];
                 const gradient = reviewGradients[i % reviewGradients.length];
                 const initials = name.split(" ").map((n) => n[0]).join("");
-
                 return (
                   <div key={review.id} className="px-7 py-5 hover:bg-white/2 transition-all duration-200">
                     <div className="flex gap-4">
@@ -351,8 +344,6 @@ export default function ProductDetails() {
                 );
               })}
             </div>
-
-            {/* Footer */}
             <div className="px-7 py-4 border-t border-white/5 bg-black/20">
               <p className="text-xs text-zinc-600 text-center">Avaliações coletadas automaticamente pelo DealHunter AI</p>
             </div>
@@ -478,7 +469,6 @@ export default function ProductDetails() {
             )}
           </div>
         </div>
-
       </section>
     </main>
   );
