@@ -42,3 +42,81 @@ body {
 * {
   border-color: oklch(1 0 0 / 10%);
 }
+
+/* Modo claro */
+html.light {
+  --bg-primary: #f8f8ff;
+  --bg-secondary: #f0f0fa;
+  --text-primary: #18181b;
+  --text-secondary: #52525b;
+  --border-color: rgba(0, 0, 0, 0.08);
+}
+
+html.light body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+html.light .bg-\[\#080810\] {
+  background-color: #f8f8ff !important;
+}
+
+html.light .bg-\[\#080810\]\/80 {
+  background-color: rgba(248, 248, 255, 0.85) !important;
+}
+
+html.light .bg-zinc-900\/60,
+html.light .bg-zinc-900\/80,
+html.light .bg-zinc-900\/40,
+html.light .bg-zinc-900\/90 {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+}
+
+html.light .border-white\/5,
+html.light .border-white\/8 {
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+html.light .text-white {
+  color: #18181b !important;
+}
+
+html.light .text-zinc-100,
+html.light .text-zinc-200,
+html.light .text-zinc-300 {
+  color: #27272a !important;
+}
+
+html.light .text-zinc-400 {
+  color: #52525b !important;
+}
+
+html.light .text-zinc-500 {
+  color: #71717a !important;
+}
+
+html.light .text-zinc-600 {
+  color: #a1a1aa !important;
+}
+
+html.light .bg-zinc-800\/60,
+html.light .bg-zinc-800\/40,
+html.light .bg-zinc-800 {
+  background-color: rgba(0, 0, 0, 0.06) !important;
+}
+
+html.light .bg-black\/50,
+html.light .bg-black\/40,
+html.light .bg-black\/30,
+html.light .bg-black\/20 {
+  background-color: rgba(0, 0, 0, 0.04) !important;
+}
+
+html.light .border-zinc-800,
+html.light .border-zinc-700 {
+  border-color: rgba(0, 0, 0, 0.12) !important;
+}
+
+html.light .bg-zinc-900\/60.backdrop-blur-xl {
+  background-color: rgba(248, 248, 255, 0.9) !important;
+}

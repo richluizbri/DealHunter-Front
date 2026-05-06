@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import api from "./lib/api";
 import { Skeleton } from "@/components/ui/skeleton";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 function calcVariacao(product) {
   const h = product.history || [];
@@ -99,6 +100,7 @@ export default function Home() {
             <p className="text-zinc-500 text-sm">Monitoramento inteligente de preços</p>
           </div>
           <div className="flex items-center gap-3">
+            <ThemeToggle />
             <span className="text-xs text-zinc-500 bg-zinc-900/80 border border-zinc-800 rounded-full px-3 py-1.5">
               {meta?.total ?? sorted.length} produtos
             </span>
@@ -233,7 +235,6 @@ export default function Home() {
                   >
                     <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-violet-500/0 to-transparent group-hover:via-violet-500/70 transition-all duration-500" />
 
-                    {/* Imagem — object-cover preenche todo o espaço */}
                     <div className="relative h-56 bg-gradient-to-br from-zinc-800/60 to-zinc-900/60 overflow-hidden">
                       {product.imagem ? (
                         <img

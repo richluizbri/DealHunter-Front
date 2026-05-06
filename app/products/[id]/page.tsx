@@ -5,6 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 import { io } from "socket.io-client";
 import api from "@/app/lib/api";
 import { Skeleton } from "@/components/ui/skeleton";
+import { ThemeToggle } from "@/components/theme-toggle";
 import {
   LineChart, Line, XAxis, YAxis,
   CartesianGrid, Tooltip, ResponsiveContainer,
@@ -156,10 +157,13 @@ export default function ProductDetails() {
             <span className="group-hover:-translate-x-1 transition-transform duration-200 inline-block">←</span>
             Voltar
           </button>
-          <span className="text-base font-bold tracking-tight">
-            Deal<span className="text-violet-400">Hunter</span>
-            <span className="text-xs font-normal text-zinc-500 ml-1">AI</span>
-          </span>
+          <div className="flex items-center gap-3">
+            <ThemeToggle />
+            <span className="text-base font-bold tracking-tight">
+              Deal<span className="text-violet-400">Hunter</span>
+              <span className="text-xs font-normal text-zinc-500 ml-1">AI</span>
+            </span>
+          </div>
         </div>
       </header>
 
@@ -176,7 +180,6 @@ export default function ProductDetails() {
           <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-violet-500/80 to-transparent" />
           <div className="flex flex-col md:flex-row">
 
-            {/* Imagem — object-cover preenche todo o espaço */}
             <div className="relative md:w-[460px] md:min-h-[420px] h-72 bg-gradient-to-br from-zinc-800/50 to-zinc-900/50 overflow-hidden flex-shrink-0">
               <div className="absolute inset-0 bg-gradient-to-br from-violet-600/5 via-transparent to-indigo-600/5" />
               {product.imagem ? (
@@ -193,7 +196,6 @@ export default function ProductDetails() {
               <div className="hidden md:block absolute right-0 top-10 bottom-10 w-px bg-gradient-to-b from-transparent via-white/8 to-transparent" />
             </div>
 
-            {/* Info */}
             <div className="flex-1 p-8 md:p-10 space-y-6">
               <div className="flex flex-wrap items-center gap-2">
                 <span className="inline-flex items-center gap-1.5 text-xs font-medium text-emerald-400 bg-emerald-500/10 border border-emerald-500/25 rounded-full px-3 py-1">
@@ -232,7 +234,7 @@ export default function ProductDetails() {
 
               <div className="flex flex-wrap gap-3 pt-2">
                 {product.url && (
-                  <a 
+                  
                     href={product.url}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -286,190 +288,3 @@ export default function ProductDetails() {
                   </div>
                 </div>
                 {product.rating && (
-                  <div className="flex items-center gap-3 bg-amber-500/8 border border-amber-500/20 rounded-2xl px-4 py-2.5">
-                    <p className="text-3xl font-black text-amber-400">{product.rating.split(" ")[0]}</p>
-                    <div>
-                      <div className="flex gap-0.5">
-                        {Array.from({ length: 5 }).map((_, i) => (
-                          <span key={i} className={`text-sm ${i < Math.round(parseFloat(product.rating)) ? "text-amber-400" : "text-zinc-700"}`}>★</span>
-                        ))}
-                      </div>
-                      <p className="text-xs text-zinc-500 mt-0.5">nota geral</p>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            <div className="divide-y divide-white/5">
-              {reviews.map((review, i) => {
-                const name     = reviewNames[i % reviewNames.length];
-                const star     = reviewStars[i % reviewStars.length];
-                const days     = reviewDaysAgo[i % reviewDaysAgo.length];
-                const gradient = reviewGradients[i % reviewGradients.length];
-                const initials = name.split(" ").map((n) => n[0]).join("");
-                return (
-                  <div key={review.id} className="px-7 py-5 hover:bg-white/2 transition-all duration-200">
-                    <div className="flex gap-4">
-                      <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${gradient} flex items-center justify-center text-xs font-black text-white flex-shrink-0 shadow-lg`}>
-                        {initials}
-                      </div>
-                      <div className="flex-1 space-y-2 min-w-0">
-                        <div className="flex items-start justify-between gap-2 flex-wrap">
-                          <div>
-                            <p className="text-sm font-semibold text-white">{name}</p>
-                            <div className="flex items-center gap-1 mt-0.5">
-                              {Array.from({ length: 5 }).map((_, s) => (
-                                <span key={s} className={`text-xs ${s < star ? "text-amber-400" : "text-zinc-700"}`}>★</span>
-                              ))}
-                              <span className="text-xs text-zinc-600 ml-1">({star}/5)</span>
-                            </div>
-                          </div>
-                          <div className="flex items-center gap-2 flex-shrink-0">
-                            <span className="text-xs text-zinc-600">há {days} dias</span>
-                            <span className="inline-flex items-center gap-1 text-xs text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 rounded-full px-2 py-0.5">
-                              ✓ Verificada
-                            </span>
-                          </div>
-                        </div>
-                        <p className="text-sm text-zinc-300 leading-relaxed">{review.texto}</p>
-                        <div className="flex items-center gap-3 pt-1">
-                          <span className="text-xs text-zinc-600">Útil?</span>
-                          <button className="text-xs text-zinc-500 hover:text-emerald-400 transition-colors duration-200">👍 Sim</button>
-                          <button className="text-xs text-zinc-500 hover:text-red-400 transition-colors duration-200">👎 Não</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-            <div className="px-7 py-4 border-t border-white/5 bg-black/20">
-              <p className="text-xs text-zinc-600 text-center">Avaliações coletadas automaticamente pelo DealHunter AI</p>
-            </div>
-          </div>
-        )}
-
-        {/* IA */}
-        <div className="rounded-3xl border border-white/8 bg-gradient-to-br from-zinc-900/80 to-zinc-900/40 overflow-hidden">
-          <div className="flex items-center justify-between px-7 py-5 border-b border-white/5">
-            <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-violet-500/20 to-indigo-500/10 border border-violet-500/25 flex items-center justify-center">🤖</div>
-              <div>
-                <h3 className="text-sm font-semibold text-white">Análise de IA</h3>
-                <p className="text-xs text-zinc-500">Insights por inteligência artificial</p>
-              </div>
-            </div>
-            <button
-              onClick={fetchAiAnalysis}
-              disabled={aiLoading}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-zinc-800/80 hover:bg-zinc-700/80 border border-zinc-700/50 hover:border-violet-500/40 text-zinc-300 hover:text-violet-300 text-xs font-medium transition-all duration-200 disabled:opacity-50 active:scale-95"
-            >
-              {aiLoading ? (
-                <><span className="w-3 h-3 border-2 border-zinc-500/30 border-t-zinc-400 rounded-full animate-spin" />Analisando...</>
-              ) : "✨ Gerar análise"}
-            </button>
-          </div>
-
-          {aiError && (
-            <div className="px-7 py-4">
-              <p className="text-xs text-red-400 bg-red-500/10 border border-red-500/20 rounded-xl px-4 py-3">{aiError}</p>
-            </div>
-          )}
-
-          {aiData && (
-            <div className="p-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className={`rounded-2xl bg-gradient-to-br ${trendConfig(aiData.priceAnalysis.trend).bg} border p-5 space-y-3`}>
-                <div className="flex items-center gap-2">
-                  <span className="text-2xl">{trendConfig(aiData.priceAnalysis.trend).icon}</span>
-                  <div>
-                    <p className="text-xs text-zinc-500 uppercase tracking-widest">Tendência</p>
-                    <p className={`text-sm font-bold ${trendConfig(aiData.priceAnalysis.trend).color}`}>{trendConfig(aiData.priceAnalysis.trend).label}</p>
-                  </div>
-                </div>
-                <p className="text-sm text-zinc-200 leading-relaxed">{aiData.priceAnalysis.summary}</p>
-                <div className="border-t border-white/8 pt-3 space-y-2">
-                  <div>
-                    <p className="text-xs text-zinc-500 uppercase tracking-widest mb-1">Recomendação</p>
-                    <p className="text-xs text-violet-300">{aiData.priceAnalysis.recommendation}</p>
-                  </div>
-                  {aiData.priceAnalysis.insight && (
-                    <div>
-                      <p className="text-xs text-zinc-500 uppercase tracking-widest mb-1">Insight</p>
-                      <p className="text-xs text-zinc-400">{aiData.priceAnalysis.insight}</p>
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              <div className={`rounded-2xl bg-gradient-to-br ${sentimentConfig(aiData.ratingAnalysis.sentiment).bg} border p-5 space-y-3`}>
-                <div className="flex items-center gap-2">
-                  <span className="text-2xl">{sentimentConfig(aiData.ratingAnalysis.sentiment).icon}</span>
-                  <div>
-                    <p className="text-xs text-zinc-500 uppercase tracking-widest">Sentimento</p>
-                    <p className={`text-sm font-bold ${sentimentConfig(aiData.ratingAnalysis.sentiment).color}`}>{aiData.ratingAnalysis.label}</p>
-                  </div>
-                </div>
-                <p className="text-sm text-zinc-200 leading-relaxed">{aiData.ratingAnalysis.description}</p>
-                <div className="border-t border-white/8 pt-3">
-                  <p className="text-xs text-zinc-500 uppercase tracking-widest mb-1">Avaliação</p>
-                  <p className="text-xs text-amber-400">★ {product.rating || "Sem avaliações"}</p>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {!aiData && !aiLoading && !aiError && (
-            <div className="flex flex-col items-center justify-center py-14 space-y-3">
-              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-violet-500/15 to-indigo-500/10 border border-violet-500/20 flex items-center justify-center text-3xl">🤖</div>
-              <p className="text-sm text-zinc-500">Clique em "Gerar análise" para obter insights</p>
-            </div>
-          )}
-        </div>
-
-        {/* GRÁFICO */}
-        <div className="rounded-3xl border border-white/8 bg-gradient-to-br from-zinc-900/80 to-zinc-900/40 overflow-hidden">
-          <div className="flex items-center justify-between px-7 py-5 border-b border-white/5">
-            <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-violet-500/20 to-indigo-500/10 border border-violet-500/25 flex items-center justify-center">📊</div>
-              <div>
-                <h3 className="text-sm font-semibold text-white">Histórico de Preços</h3>
-                <p className="text-xs text-zinc-500">Flutuação em BRL</p>
-              </div>
-            </div>
-            <span className="text-xs text-zinc-500 bg-zinc-800/60 border border-zinc-700/50 rounded-full px-3 py-1">
-              {chartData.length} registro(s)
-            </span>
-          </div>
-          <div className="p-6">
-            {chartData.length < 2 ? (
-              <div className="h-48 flex flex-col items-center justify-center space-y-3">
-                <div className="w-14 h-14 rounded-2xl bg-zinc-800/60 border border-zinc-700/50 flex items-center justify-center text-2xl">📈</div>
-                <p className="text-sm text-zinc-500">Dispare mais coletas para visualizar o gráfico</p>
-              </div>
-            ) : (
-              <ResponsiveContainer width="100%" height={280}>
-                <LineChart data={chartData}>
-                  <defs>
-                    <linearGradient id="g" x1="0" y1="0" x2="1" y2="0">
-                      <stop offset="0%" stopColor="#7c3aed" />
-                      <stop offset="100%" stopColor="#6366f1" />
-                    </linearGradient>
-                  </defs>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#ffffff06" />
-                  <XAxis dataKey="data" tick={{ fill: "#52525b", fontSize: 11 }} axisLine={false} tickLine={false} />
-                  <YAxis tick={{ fill: "#52525b", fontSize: 11 }} axisLine={false} tickLine={false} tickFormatter={(v) => `R$${v}`} />
-                  <Tooltip
-                    contentStyle={{ backgroundColor: "#111118", border: "1px solid rgba(255,255,255,0.08)", borderRadius: "14px", color: "#fff", fontSize: "12px" }}
-                    formatter={(value) => [value?.toLocaleString("pt-BR", { style: "currency", currency: "BRL" }), "Preço"]}
-                  />
-                  <Line type="monotone" dataKey="preco" stroke="url(#g)" strokeWidth={3} dot={{ fill: "#7c3aed", r: 5, strokeWidth: 0 }} activeDot={{ r: 7, fill: "#a78bfa", strokeWidth: 0 }} />
-                </LineChart>
-              </ResponsiveContainer>
-            )}
-          </div>
-        </div>
-      </section>
-    </main>
-  );
-}
