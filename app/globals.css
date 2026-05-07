@@ -222,3 +222,8 @@ html.light div[class*="md:min-h"] {
 html.light div[class*="px-7"][class*="py-5"] {
   border-bottom: 1px solid #888888 !important;
 }
+/* Contorno preto no input de busca e URL */
+html.light input[type="text"],
+html.light input[type="url"] {
+  border: 1.5px solid #555555 !important;
+}
