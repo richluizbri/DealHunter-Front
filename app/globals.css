@@ -176,3 +176,38 @@ html.light div[class*="md:w-\[460px\]"] {
 html.light div[class*="flex-1"][class*="p-8"] {
   background-color: #f5f5f5 !important;
 }
+/* Botão gerar análise — texto branco */
+html.light button[class*="bg-zinc-800"] {
+  background-color: #6d28d9 !important;
+}
+html.light button[class*="bg-zinc-800"] * {
+  color: #ffffff !important;
+}
+
+/* Detalhes em roxo na listagem */
+html.light .text-zinc-500 { color: #7c3aed !important; }
+html.light p[class*="text-sm"][class*="text-zinc-500"] { color: #7c3aed !important; }
+
+/* Badge "produtos" no header */
+html.light span[class*="bg-zinc-900"] {
+  background-color: #ede9fe !important;
+  border-color: #7c3aed !important;
+  color: #6d28d9 !important;
+}
+
+/* Badge Analisado/Pendente */
+html.light span[class*="rounded-full"][class*="border"] {
+  border-color: #7c3aed !important;
+  color: #6d28d9 !important;
+  background-color: #ede9fe !important;
+}
+
+/* Data nos cards */
+html.light span[class*="text-zinc-700"] {
+  color: #7c3aed !important;
+}
+
+/* Rating estrela */
+html.light p[class*="text-amber-400"] {
+  color: #d97706 !important;
+}
