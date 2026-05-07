@@ -211,3 +211,14 @@ html.light span[class*="text-zinc-700"] {
 html.light p[class*="text-amber-400"] {
   color: #d97706 !important;
 }
+/* Contorno preto nas imagens dos produtos */
+html.light div[class*="h-56"],
+html.light div[class*="h-72"],
+html.light div[class*="md:min-h"] {
+  border: 2px solid #888888 !important;
+}
+
+/* Contorno nos cards de comentário */
+html.light div[class*="px-7"][class*="py-5"] {
+  border-bottom: 1px solid #888888 !important;
+}
